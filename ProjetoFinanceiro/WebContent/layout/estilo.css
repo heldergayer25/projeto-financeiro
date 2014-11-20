@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+
+
+div.logout { float: right; margin-right: 10px; }
+body {background-color: #eeeeee; font-family: 'helvetica'; }
+.login { border: 2px solid #D9D9D9; width: 400px; height: 250px; margin: 0 auto; margin-top: 200px;}	
+h2 { font-size: 40px; text-align: center; color: #B8B8B8; margin-top: 100px; }
+

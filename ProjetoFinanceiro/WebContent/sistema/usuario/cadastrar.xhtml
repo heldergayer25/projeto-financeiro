@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+		 
+</h:head>
+<h:body>
+	<ui:composition template="/layout/layout.xhtml">	
+		<ui:define name="conteudo">		
+			<h:form>
+				<p:panel header="Dados principais">
+					<h:panelGrid>
+						<p:outputLabel for="nome" value="Nome" />
+						<p:inputText id="nome" value="#{usuarioAction.usuario.nome}" />
+						<p:outputLabel for="cpf" value="CPF" />
+						<p:inputText id="cpf" value="#{usuarioAction.usuario.cpf}" />
+						<p:outputLabel for="empresa" value="Empresa" />
+						<p:pickList							
+							id="empresa" 
+							value="#{usuarioAction.listaEmpresas}" 
+							converter="omnifaces.SelectItemsConverter" 
+							var="_empresa" 
+							itemLabel="#{_empresa.razao}" 
+							itemValue="#{_empresa}" />
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Acesso">
+					<h:panelGrid>
+						<p:outputLabel for="login" value="Login" />
+						<p:inputText id="login" value="#{usuarioAction.acesso.login}" />
+						<p:outputLabel for="senha" value="Senha" />
+						<p:password id="senha" value="#{usuarioAction.acesso.senha}" feedback="true" weakLabel="Fraco" goodLabel="Medio" strongLabel="Forte" promptLabel="Por favor, digite uma senha" />
+						<p:outputLabel for="repetirSenha" value="Repetir Senha" />
+						<p:password id="repetirSenha" value="#{usuarioAction.repetirSenha}">
+							<p:ajax listener="#{usuarioAction.validarSenha()}" event="blur" />
+						</p:password>
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Endereço" toggleable="true">
+	                <h:panelGrid>
+	                	<p:outputLabel for="rua" value="Rua" />
+		                <p:inputText id="rua" value="#{usuarioAction.endereco.rua}" />
+		                <p:outputLabel for="numero" value="Número" />
+		                <p:inputText id="numero" value="#{usuarioAction.endereco.numero}" />
+		                <p:outputLabel for="cep" value="CEP" />
+		                <p:inputText id="cep" value="#{usuarioAction.endereco.cep}" />
+		                <p:outputLabel for="bairro" value="Bairro" />
+		                <p:inputText id="bairro" value="#{usuarioAction.endereco.bairro}" />
+		                <p:outputLabel for="outro" value="Outro" />
+		                <p:inputText id="outro" value="#{usuarioAction.endereco.outro}" />
+		                <p:outputLabel for="uf" value="UF" />			                
+		                <p:selectOneMenu id="uf" converter="omnifaces.SelectItemsConverter" value="#{usuarioAction.uf}">	                	
+		                	<f:selectItems value="#{usuarioAction.estados}" var="_uf" itemLabel="#{_uf.sigla}" itemValue="#{_uf}" />
+		                	<p:ajax listener="#{usuarioAction.municipiosPorUf()}" update="municipio" />	                		                			                	
+		                </p:selectOneMenu>
+		                <p:outputLabel for="municipio" value="Município" />
+		                <p:selectOneMenu id="municipio" converter="omnifaces.SelectItemsConverter" value="#{usuarioAction.municipioSelecionado}">	                	                		
+		                	<f:selectItems value="#{usuarioAction.municipios}" var="_mun" itemLabel="#{_mun.nome}" itemValue="#{_mun}" />
+		                </p:selectOneMenu>
+					</h:panelGrid>                
+            	</p:panel>
+	            <p:panel header="Contato" toggleable="true">
+	            	<h:panelGrid>
+		                <p:outputLabel for="telefone" value="Telefone" />
+		                <p:inputText id="telefone" value="#{usuarioAction.contato.telefone}" />
+		                <p:outputLabel for="celular" value="Celular" />
+		                <p:inputText id="celular" value="#{usuarioAction.contato.celular}" />
+		                <p:outputLabel for="email" value="E-mail" />
+		                <p:inputText id="email" value="#{usuarioAction.contato.email}" />
+	                </h:panelGrid>
+	            </p:panel>
+		    </h:form>
+		</ui:define>
+	</ui:composition>      
+</h:body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+		 
+</h:head>
+<h:body>
+	<ui:composition template="/layout/layout.xhtml">	
+		<ui:define name="conteudo">		
+			<p:tabView>
+		        <p:tab title="Pesquisar">
+		            <p:panel header="Pesquisar por:" toggleable="true">
+			            <p:panelGrid columns="2">
+			                <p:outputLabel for="razao" value="Razão Social" />
+			                <p:inputText id="razao" value="" />
+							<p:outputLabel for="fantasia" value="Nome Fantasia" />
+			                <p:inputText id="fantasia" value="" />
+							<p:outputLabel for="cnpj" value="CNPJ" />
+			                <p:inputText id="cnpj" value="" />
+							<p:outputLabel for="cpf" value="CPF" />
+			                <p:inputText id="cpf" value="" />
+			                <p:commandButton value="Pesquisar" />							
+		                </p:panelGrid>
+		            </p:panel>
+		            <p:panel header="Resultados" toggleable="true">
+		            	<p:panelGrid columns="2">
+		            		<p:dataTable>
+							<p:column headerText="Principal">
+								<p:selectBooleanCheckbox/>
+							</p:column>			   
+							<p:column headerText="Ações">
+								<p:commandLink>Editar</p:commandLink>
+								<p:commandLink>Excluir</p:commandLink>
+							</p:column>         
+			            	<p:column headerText="Razão Social">
+			            		<h:outputText value="Empresa" />
+			            	</p:column>
+			            	<p:column headerText="Nome Fantasia">
+			            		<h:outputText value="Nome" />
+			            	</p:column>		            	
+			            	<p:column headerText="CPF/CNPJ">
+			            		<h:outputText value="00.000.000/0000-00" />
+			            	</p:column>			            	
+			            </p:dataTable>
+		            	</p:panelGrid>
+		            </p:panel>
+		        </p:tab>
+		    </p:tabView>
+		</ui:define>
+	</ui:composition>      
+</h:body>
+</html>
