@@ -1,6 +1,7 @@
 package br.com.financeiro.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -43,5 +44,13 @@ public class EmpresaService implements Serializable {
 			}
 			
 		}
+	}
+
+	public List<Empresa> listarEmpresas() {
+		return empresaRepository.findAll();
+	}
+
+	public Empresa obterEmpresaPorId(Integer id) {
+		return empresaRepository.findBy(id);
 	}
 }

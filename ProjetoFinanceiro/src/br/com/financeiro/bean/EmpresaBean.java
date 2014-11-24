@@ -38,6 +38,10 @@ public class EmpresaBean extends LoginBean {
 	private Municipio municipioSelecionado;
 	private List<Municipio> municipios;
 	private Uf uf;
+	
+	private List<Empresa> empresas;
+	private Empresa empresaSelecionada;
+	private List<Empresa> filtroEmpresas;
 		
 	
 	@PostConstruct
@@ -48,6 +52,8 @@ public class EmpresaBean extends LoginBean {
 		uf = new Uf();
 		uf = ufService.obterUfPorId("AC");
 		municipiosPorUf();
+		empresas = new ArrayList<Empresa>(empresaService.listarEmpresas());
+		filtroEmpresas = new ArrayList<Empresa>();
 	}
 
 	
@@ -69,6 +75,9 @@ public class EmpresaBean extends LoginBean {
 		Mensagens.info("Empresa salva com sucesso!");
 	}
 	
+	public void modalEditEmpresa() {
+		empresa = empresaService.obterEmpresaPorId(empresa.getId());
+	}
 	
 	public void municipiosPorUf() {
 		municipios = new ArrayList<Municipio>(municipioService.listaMunicipiosPorUf(uf));
@@ -128,6 +137,38 @@ public class EmpresaBean extends LoginBean {
 
 	public void setUf(Uf uf) {
 		this.uf = uf;
+	}
+
+
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+
+	public List<Empresa> getFiltroEmpresas() {
+		return filtroEmpresas;
+	}
+
+
+	public void setFiltroEmpresas(List<Empresa> filtroEmpresas) {
+		this.filtroEmpresas = filtroEmpresas;
+	}
+
+
+	public Empresa getEmpresaSelecionada() {
+		return empresaSelecionada;
+	}
+
+
+	public void setEmpresaSelecionada(Empresa empresaSelecionada) {
+		this.empresaSelecionada = empresaSelecionada;
 	}	
+	
+	
 	
 }
