@@ -1,6 +1,5 @@
 package br.com.financeiro.bean;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -35,7 +34,7 @@ public class LoginBean implements Serializable  {
 		
 	}
 
-	public void logarNoSistema() throws IOException {
+	public void logarNoSistema() throws Exception {
 		
 		if(validarLoginSenha()) {
 			usuarioLogado = new Usuario();
