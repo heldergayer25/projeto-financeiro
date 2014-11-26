@@ -11,55 +11,23 @@
 <h:body>
 	<ui:composition template="/layout/layout.xhtml">	
 		<ui:define name="conteudo">		
-		<h:form id="cadastrarEmpresaForm">
+		<h:form>
 		
-            <p:panel header="Dados" toggleable="true">
+            <p:panel header="Conta Contábil" toggleable="true">
 	            <h:panelGrid>
-	                <p:outputLabel for="razao" value="Razão Social" />
-	                <p:inputText id="razao" value="#{empresaBean.empresa.razao}" />
-					<p:outputLabel for="fantasia" value="Nome Fantasia" />
-	                <p:inputText id="fantasia" value="#{empresaBean.empresa.fantasia}" />					
-					<p:outputLabel for="cpfCnpj" value="CPF/CNPJ" />
-	                <p:inputText id="cpfCnpj" value="#{empresaBean.empresa.cpfCnpj}" />
-					<p:outputLabel for="ie" value="Inscrição Estadual" />
-	                <p:inputText id="ie" value="#{empresaBean.empresa.ie}" />
-					<p:outputLabel for="im" value="Inscrição Municipal" />
-	                <p:inputText id="im" value="#{empresaBean.empresa.im}" />
+	                <p:outputLabel for="codigo" value="Código" />
+	                <p:inputText id="codigo" value="#{contaContabilBean.contaContabil.codigo}" />
+	                <p:outputLabel for="nome" value="Nome" />
+	                <p:inputText id="nome" value="#{contaContabilBean.contaContabil.nome}" />	
+	                <p:outputLabel for="tipo" value="Tipo" />
+	                <p:inputSwitch id="tipo" value="#{contaContabilBean.contaContabil.tipo}" onLabel="Sintético" offLabel="Analítico" />
+	                <p:outputLabel for="planoDeContas" value="Plano de Contas" />	
+	                <p:selectOneMenu id="planoDeContas">
+	                	<f:selectItems />
+	                </p:selectOneMenu>			
       		      </h:panelGrid>          
             </p:panel>
-            <p:panel header="Endereço" toggleable="true">
-                <h:panelGrid>
-                	<p:outputLabel for="rua" value="Rua" />
-	                <p:inputText id="rua" value="#{empresaBean.endereco.rua}" /> 
-	                <p:outputLabel for="numero" value="Número" />
-	                <p:inputText id="numero" value="#{empresaBean.endereco.numero}" />
-	                <p:outputLabel for="cep" value="CEP" />
-	                <p:inputText id="cep" value="#{empresaBean.endereco.cep}" />
-	                <p:outputLabel for="bairro" value="Bairro" />
-	                <p:inputText id="bairro" value="#{empresaBean.endereco.bairro}" />
-	                <p:outputLabel for="outro" value="Outro" />
-	                <p:inputText id="outro" value="#{empresaBean.endereco.outro}" />
-	                <p:outputLabel for="uf" value="UF" />			                
-	                <p:selectOneMenu id="uf" converter="omnifaces.SelectItemsConverter" value="#{empresaBean.uf}">	                	
-	                	<f:selectItems value="#{empresaBean.listaEstados}" var="_uf" itemLabel="#{_uf.sigla}" itemValue="#{_uf}" />
-	                	<p:ajax listener="#{empresaBean.municipiosPorUf()}" update="municipio" event="change" />	                		                			                	
-	                </p:selectOneMenu> 
-	                <p:outputLabel for="municipio" value="Município" />
-	                <p:selectOneMenu id="municipio" converter="omnifaces.SelectItemsConverter" value="#{empresaBean.municipioSelecionado}">	                	                		
-	                	<f:selectItems value="#{empresaBean.municipios}" var="_mun" itemLabel="#{_mun.nome}" itemValue="#{_mun}" />
-	                </p:selectOneMenu>
-				</h:panelGrid>                
-            </p:panel>
-            <p:panel header="Contato" toggleable="true">
-            	<h:panelGrid>
-	                <p:outputLabel for="telefone" value="Telefone" />
-	                <p:inputText id="telefone" value="#{empresaBean.contato.telefone}" />
-	                <p:outputLabel for="celular" value="Celular" />
-	                <p:inputText id="celular" value="#{empresaBean.contato.celular}" />
-	                <p:outputLabel for="email" value="E-mail" />
-	                <p:inputText id="email" value="#{empresaBean.contato.email}" />
-                </h:panelGrid>
-            </p:panel>
+            
             <div align="center" style="margin-top: 30px;">
             	<p:commandButton value="Salvar" action="#{empresaBean.salvar()}" update="@form" />
             	<p:commandButton value="Voltar"  />
