@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import br.com.financeiro.pojo.Acesso;
+import br.com.financeiro.pojo.Empresa;
 import br.com.financeiro.pojo.Usuario;
 import br.com.financeiro.service.AcessoService;
 import br.com.financeiro.service.UsuarioService;
@@ -27,7 +28,9 @@ public class LoginBean implements Serializable  {
 	private String login;
 	private String senha;
 	private Acesso acesso;
-	private Usuario usuarioLogado;
+	protected Usuario usuarioLogado;
+	protected Empresa empresaSessao;
+	private boolean logado;
 	
 	@PostConstruct
 	public void init() {
@@ -36,9 +39,16 @@ public class LoginBean implements Serializable  {
 
 	public void logarNoSistema() throws Exception {
 		
-		if(validarLoginSenha()) {
+		logado = validarLoginSenha();
+		
+		if(logado) {
+			
 			usuarioLogado = new Usuario();
 			usuarioLogado = usuarioService.obterUsuarioPorAcesso(acesso);
+			
+//			HttpSession session = Sessao.getSession();
+//            session.setAttribute("usuarioLogado", usuarioLogado);			
+			
 			Mensagens.info("Logado!");
 			FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml"); 
 		} else {
@@ -93,6 +103,22 @@ public class LoginBean implements Serializable  {
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
+	}
+
+	public Empresa getEmpresaSessao() {
+		return empresaSessao;
+	}
+
+	public void setEmpresaSessao(Empresa empresaSessao) {
+		this.empresaSessao = empresaSessao;
+	}
+
+	public boolean isLogado() {
+		return logado;
+	}
+
+	public void setLogado(boolean logado) {
+		this.logado = logado;
 	}
 	
 }

@@ -28,4 +28,9 @@ public class PlanoDeContasService implements Serializable {
 			Mensagens.fatal("Um Plano de Contas de ser informado!");
 		}
 	}
+
+
+	public PlanoDeContas obterPlanoDeContasPadrao() {		
+		return planoDeContasRepository.findBy(1);
+	}
 }

@@ -28,12 +28,8 @@ public class PlanoDeContasBean extends LoginBean {
 	}
 
 	public void salvar() throws Exception {
-//		private Integer id;
-//		private Empresa empresa;
-//		private PlanoDeContas planoDeContas;
-//		private String descricao;
-//		private Set<PlanoDeContas> planoDeContases = new HashSet<>(0);
-//		private Set<ContaContabil> contaContabils = new HashSet<>(0);
+		planoDeContas.setEmpresa(empresaSessao);
+		planoDeContas.setPlanoDeContas(planoDeContasService.obterPlanoDeContasPadrao());
 		
 		planoDeContasService.salvar(planoDeContas);
 		Mensagens.info("Plano de Contas salvo com sucesso!");
