@@ -1,5 +1,6 @@
 package br.com.financeiro.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import br.com.financeiro.pojo.Acesso;
 import br.com.financeiro.pojo.Empresa;
 import br.com.financeiro.pojo.Usuario;
 import br.com.financeiro.service.AcessoService;
+import br.com.financeiro.service.EmpresaService;
 import br.com.financeiro.service.UsuarioService;
 import br.com.financeiro.util.Criptografia;
 import br.com.financeiro.util.Mensagens;
@@ -24,42 +26,46 @@ public class LoginBean implements Serializable  {
 	
 	@EJB UsuarioService usuarioService;
 	@EJB AcessoService acessoService;
+	@EJB EmpresaService empresaService;
 	
 	private String login;
 	private String senha;
 	private Acesso acesso;
-	protected Usuario usuarioLogado;
-	protected Empresa empresaSessao;
+	private Usuario usuarioLogado;
+	private Empresa empresaSessao;
 	private boolean logado;
 	
 	@PostConstruct
 	public void init() {
-		
+		empresaSessao = new Empresa();
 	}
 
-	public void logarNoSistema() throws Exception {
+	public String logarNoSistema() throws Exception {
 		
 		logado = validarLoginSenha();
 		
 		if(logado) {
 			
-			usuarioLogado = new Usuario();
+			usuarioLogado = null;
 			usuarioLogado = usuarioService.obterUsuarioPorAcesso(acesso);
 			
-//			HttpSession session = Sessao.getSession();
-//            session.setAttribute("usuarioLogado", usuarioLogado);			
+//			HttpSession session = Util.getSession();
+//            session.setAttribute("usuario", usuarioLogado);			
 			
 			Mensagens.info("Logado!");
-			FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml"); 
+			//FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml");
+			//return "/sistema/home.xhtml";
+			return "/selecao_empresa.xhtml";
 		} else {
 			Mensagens.warn("Login ou senha inválidos!");
+			return "/login.xhtml";
 		}
 		
 	}
 	
 	public boolean validarLoginSenha() {
 		
-		acesso = new Acesso();	
+		
 		Criptografia md5 = new Criptografia();
 		
 		String senhaCriptografada = md5.md5(senha);		
@@ -71,7 +77,11 @@ public class LoginBean implements Serializable  {
 		return false;
 	}
 	
-	
+	public void paginaPrincipal() throws IOException {
+		Mensagens.info(empresaSessao.getRazao());
+		empresaSessao = empresaService.obterEmpresaPorId(empresaSessao.getId());
+		FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml");		
+	}
 
 	public String getLogin() {
 		return login;

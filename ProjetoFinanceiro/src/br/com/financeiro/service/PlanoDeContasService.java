@@ -23,6 +23,7 @@ public class PlanoDeContasService implements Serializable {
 		if(planoDeContas != null) {
 			if(planoDeContasRepository.findOptionalByDescricaoAndEmpresa(planoDeContas.getDescricao(), planoDeContas.getEmpresa()) != null) {
 				Mensagens.fatal("Já existe Plano De Contas com essa descrição para essa empresa!");
+				planoDeContasRepository.save(planoDeContas);
 			}
 		} else {
 			Mensagens.fatal("Um Plano de Contas de ser informado!");

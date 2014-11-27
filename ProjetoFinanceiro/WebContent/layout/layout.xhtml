@@ -19,7 +19,8 @@
 	                  <div class="logout">                    
 	                    <h:form>
 	                     <p>Bem vindo, #{loginBean.usuarioLogado.nome}</p>
-	                        <p:commandLink value="Sair" />
+	                     <p>Empresa, #{loginBean.empresaSessao.razao}</p>
+	                     <p:commandLink value="Sair" />
 	                    </h:form>                                                                                                               
 	                  </div>                          
 	                </ui:insert>                      

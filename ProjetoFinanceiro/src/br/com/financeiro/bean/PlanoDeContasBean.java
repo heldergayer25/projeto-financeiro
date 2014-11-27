@@ -24,11 +24,11 @@ public class PlanoDeContasBean extends LoginBean {
 	
 	@PostConstruct
 	public void init() {
-		
+		planoDeContas = new PlanoDeContas();
 	}
 
 	public void salvar() throws Exception {
-		planoDeContas.setEmpresa(empresaSessao);
+		planoDeContas.setEmpresa(getEmpresaSessao());
 		planoDeContas.setPlanoDeContas(planoDeContasService.obterPlanoDeContasPadrao());
 		
 		planoDeContasService.salvar(planoDeContas);
