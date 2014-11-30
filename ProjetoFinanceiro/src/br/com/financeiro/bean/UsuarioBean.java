@@ -6,14 +6,13 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class UsuarioBean extends LoginBean {
+public class UsuarioBean extends AbstractBean {
 	
 	private static final long serialVersionUID = 1L;
-	
 	
 	@PostConstruct
 	public void init() {
 		
-	}
+	}	
 
 }

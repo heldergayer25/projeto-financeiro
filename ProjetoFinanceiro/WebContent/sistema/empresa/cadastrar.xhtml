@@ -13,7 +13,7 @@
 		<ui:define name="conteudo">		
 		<h:form id="cadastrarEmpresaForm">
 		
-            <p:panel header="Dados" toggleable="true">
+            <p:panel header="Dados">
 	            <h:panelGrid>
 	                <p:outputLabel for="razao" value="Razão Social" />
 	                <p:inputText id="razao" value="#{empresaBean.empresa.razao}" />
@@ -27,7 +27,7 @@
 	                <p:inputText id="im" value="#{empresaBean.empresa.im}" />
       		      </h:panelGrid>          
             </p:panel>
-            <p:panel header="Endereço" toggleable="true">
+            <p:panel header="Endereço">
                 <h:panelGrid>
                 	<p:outputLabel for="rua" value="Rua" />
 	                <p:inputText id="rua" value="#{empresaBean.endereco.rua}" /> 
@@ -50,7 +50,7 @@
 	                </p:selectOneMenu>
 				</h:panelGrid>                
             </p:panel>
-            <p:panel header="Contato" toggleable="true">
+            <p:panel header="Contato">
             	<h:panelGrid>
 	                <p:outputLabel for="telefone" value="Telefone" />
 	                <p:inputText id="telefone" value="#{empresaBean.contato.telefone}" />

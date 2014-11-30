@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.financeiro.pojo.Acesso;
@@ -17,6 +17,7 @@ import br.com.financeiro.service.EmpresaService;
 import br.com.financeiro.service.UsuarioService;
 import br.com.financeiro.util.Criptografia;
 import br.com.financeiro.util.Mensagens;
+import br.com.financeiro.util.RedirecionarBean;
 
 @Named
 @SessionScoped
@@ -28,43 +29,48 @@ public class LoginBean implements Serializable  {
 	@EJB AcessoService acessoService;
 	@EJB EmpresaService empresaService;
 	
+	@Inject private RedirecionarBean redirecionarBean;
+	
 	private String login;
 	private String senha;
 	private Acesso acesso;
 	private Usuario usuarioLogado;
 	private Empresa empresaSessao;
-	private boolean logado;
+	private boolean logado;		
 	
 	@PostConstruct
 	public void init() {
 		empresaSessao = new Empresa();
 	}
 
-	public String logarNoSistema() throws Exception {
+	public void logon() throws Exception {
 		
-		logado = validarLoginSenha();
-		
-		if(logado) {
-			
+		logado = validarLoginSenha();		
+		if(logado) {			
 			usuarioLogado = null;
-			usuarioLogado = usuarioService.obterUsuarioPorAcesso(acesso);
+			usuarioLogado = usuarioService.obterUsuarioPorAcesso(acesso);					
 			
-//			HttpSession session = Util.getSession();
-//            session.setAttribute("usuario", usuarioLogado);			
+			logado = true;			
+			redirecionarBean.toSelecaoEmpresa();
 			
-			Mensagens.info("Logado!");
-			//FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml");
-			//return "/sistema/home.xhtml";
-			return "/selecao_empresa.xhtml";
 		} else {
 			Mensagens.warn("Login ou senha inválidos!");
-			return "/login.xhtml";
-		}
-		
+			redirecionarBean.toLogin();			
+		}		
+	}
+	
+	/**
+	 * Logout operation.
+	 * @return
+	 */
+	public String logout() {
+		// Set the paremeter indicating that user is logged in to false
+		logado = false;		
+		// Set logout message		
+		return redirecionarBean.toLogout();
 	}
 	
 	public boolean validarLoginSenha() {
-		
 		
 		Criptografia md5 = new Criptografia();
 		
@@ -80,9 +86,10 @@ public class LoginBean implements Serializable  {
 	public void paginaPrincipal() throws IOException {
 		Mensagens.info(empresaSessao.getRazao());
 		empresaSessao = empresaService.obterEmpresaPorId(empresaSessao.getId());
-		FacesContext.getCurrentInstance().getExternalContext().redirect("sistema/home.xhtml");		
+		
+		redirecionarBean.toHome();
 	}
-
+	
 	public String getLogin() {
 		return login;
 	}
@@ -129,6 +136,6 @@ public class LoginBean implements Serializable  {
 
 	public void setLogado(boolean logado) {
 		this.logado = logado;
-	}
+	}	
 	
 }

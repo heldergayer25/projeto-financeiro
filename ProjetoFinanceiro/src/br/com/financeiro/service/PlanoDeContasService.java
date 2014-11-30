@@ -21,10 +21,11 @@ public class PlanoDeContasService implements Serializable {
 	@Transactional
 	public void salvar(PlanoDeContas planoDeContas) throws Exception {
 		if(planoDeContas != null) {
-			if(planoDeContasRepository.findOptionalByDescricaoAndEmpresa(planoDeContas.getDescricao(), planoDeContas.getEmpresa()) != null) {
-				Mensagens.fatal("Já existe Plano De Contas com essa descrição para essa empresa!");
-				planoDeContasRepository.save(planoDeContas);
+			if(planoDeContasRepository.findOptionalByDescricaoAndEmpresa(planoDeContas.getDescricao(), planoDeContas.getEmpresa()) != null) {				
+				throw new Exception("Já existe Plano De Contas com essa descrição para essa empresa!");
 			}
+			
+			planoDeContasRepository.save(planoDeContas);
 		} else {
 			Mensagens.fatal("Um Plano de Contas de ser informado!");
 		}

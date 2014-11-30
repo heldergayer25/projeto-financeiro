@@ -13,29 +13,27 @@ import br.com.financeiro.util.Mensagens;
 
 @Named
 @ViewScoped
-public class PlanoDeContasBean extends LoginBean {
+public class PlanoDeContasBean extends AbstractBean {
 
 	private static final long serialVersionUID = 1L;
 
 	@EJB private PlanoDeContasService planoDeContasService;
 	
 	private PlanoDeContas planoDeContas;
-	private List<PlanoDeContas> listaPlanoDeContas;
-	
+	private List<PlanoDeContas> listaPlanoDeContas;	
+
 	@PostConstruct
 	public void init() {
 		planoDeContas = new PlanoDeContas();
 	}
 
-	public void salvar() throws Exception {
-		planoDeContas.setEmpresa(getEmpresaSessao());
+	public void salvar() throws Exception {		
+		planoDeContas.setEmpresa(loginBean.getEmpresaSessao());
 		planoDeContas.setPlanoDeContas(planoDeContasService.obterPlanoDeContasPadrao());
 		
 		planoDeContasService.salvar(planoDeContas);
-		Mensagens.info("Plano de Contas salvo com sucesso!");
-		
-	}
-	
+		Mensagens.info("Plano de Contas salvo com sucesso!");		
+	}	
 	
 	public PlanoDeContas getPlanoDeContas() {
 		return planoDeContas;

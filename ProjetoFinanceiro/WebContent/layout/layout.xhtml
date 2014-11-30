@@ -20,7 +20,7 @@
 	                    <h:form>
 	                     <p>Bem vindo, #{loginBean.usuarioLogado.nome}</p>
 	                     <p>Empresa, #{loginBean.empresaSessao.razao}</p>
-	                     <p:commandLink value="Sair" />
+	                     <p:commandLink value="Sair" action="#{loginBean.logout()}" />
 	                    </h:form>                                                                                                               
 	                  </div>                          
 	                </ui:insert>                      

@@ -10,10 +10,10 @@ import br.com.financeiro.pojo.ContaBancaria;
 
 @Named
 @ViewScoped
-public class ContaBancariaBean extends LoginBean {
-	
-	private static final long serialVersionUID = 1L;
+public class ContaBancariaBean extends AbstractBean {
 
+	private static final long serialVersionUID = 1L;
+	
 	private ContaBancaria contaBancaria;
 	private List<ContaBancaria> listaContaBancaria;
 	

@@ -10,13 +10,12 @@ import br.com.financeiro.pojo.CondicaoDePagamento;
 
 @Named
 @ViewScoped
-public class CondicaoDePagamentoBean extends LoginBean {
-	
+public class CondicaoDePagamentoBean extends AbstractBean {
+		
 	private static final long serialVersionUID = 1L;
 	
 	private CondicaoDePagamento condicaoDePagamento;
 	private List<CondicaoDePagamento> listaCondicaoDePagamento;
-	
 	
 	@PostConstruct
 	public void init() {

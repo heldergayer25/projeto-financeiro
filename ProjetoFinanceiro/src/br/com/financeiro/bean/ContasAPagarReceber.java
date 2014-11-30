@@ -10,10 +10,10 @@ import br.com.financeiro.pojo.Movimento;
 
 @Named
 @ViewScoped
-public class ContasAPagarReceber extends LoginBean {
+public class ContasAPagarReceber extends AbstractBean {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private Movimento movimento;
 	private List<Movimento> listaMovimento;
 	

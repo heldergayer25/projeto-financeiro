@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class FormaDePagamentoBean extends LoginBean {
+public class FormaDePagamentoBean extends AbstractBean {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,4 +14,5 @@ public class FormaDePagamentoBean extends LoginBean {
 	public void init() {
 		
 	}
+	
 }

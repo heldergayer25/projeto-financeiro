@@ -11,10 +11,10 @@ import br.com.financeiro.pojo.PlanoDeContas;
 
 @Named
 @ViewScoped
-public class ContaContabilBean extends LoginBean {
+public class ContaContabilBean extends AbstractBean {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private ContaContabil contaContabil;
 	private List<ContaContabil> listaContaContabil;
 	private List<PlanoDeContas> listaPlanoDeContas;

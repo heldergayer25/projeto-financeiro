@@ -21,10 +21,10 @@ import br.com.financeiro.util.Mensagens;
 
 @Named
 @ViewScoped
-public class EmpresaBean extends LoginBean {
+public class EmpresaBean extends AbstractBean {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@EJB private MunicipioService municipioService;
 	@EJB private UfService ufService;
 	@EJB private EmpresaService empresaService;
@@ -55,7 +55,6 @@ public class EmpresaBean extends LoginBean {
 		empresas = new ArrayList<Empresa>(empresaService.listarEmpresas());
 		filtroEmpresas = new ArrayList<Empresa>();
 	}
-
 	
 	public void salvar() throws Exception {
 		contato.setAtivo(true);
@@ -167,8 +166,6 @@ public class EmpresaBean extends LoginBean {
 
 	public void setEmpresaSelecionada(Empresa empresaSelecionada) {
 		this.empresaSelecionada = empresaSelecionada;
-	}	
-	
-	
+	}
 	
 }
