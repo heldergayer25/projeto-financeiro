@@ -32,7 +32,7 @@ public class Contato implements java.io.Serializable {
 	private String celular;
 	private String email;
 	private boolean ativo;
-	private Boolean principal;
+	private boolean principal;
 
 	public Contato() {
 	}
@@ -46,7 +46,7 @@ public class Contato implements java.io.Serializable {
 
 	public Contato(Usuario usuario, Empresa empresa,
 			ClienteFornecedor clienteFornecedor, String telefone,
-			String celular, String email, boolean ativo, Boolean principal) {
+			String celular, String email, boolean ativo, boolean principal) {
 		this.usuario = usuario;
 		this.empresa = empresa;
 		this.clienteFornecedor = clienteFornecedor;
@@ -139,11 +139,11 @@ public class Contato implements java.io.Serializable {
 	}
 
 	@Column(name = "principal")
-	public Boolean getPrincipal() {
+	public boolean isPrincipal() {
 		return this.principal;
 	}
 
-	public void setPrincipal(Boolean principal) {
+	public void setPrincipal(boolean principal) {
 		this.principal = principal;
 	}
 

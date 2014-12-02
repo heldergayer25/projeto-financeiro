@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.financeiro.pojo.ContaContabil;
@@ -14,14 +15,14 @@ import br.com.financeiro.pojo.PlanoDeContas;
 public class ContaContabilBean extends AbstractBean {
 
 	private static final long serialVersionUID = 1L;
+
+	@Inject private List<PlanoDeContas> listarPlanoDeContasPorEmpresa;
 	
-	private ContaContabil contaContabil;
-	private List<ContaContabil> listaContaContabil;
-	private List<PlanoDeContas> listaPlanoDeContas;
+	private ContaContabil contaContabil;	
 	
 	@PostConstruct
 	public void init() {
-				
+		contaContabil = new ContaContabil();		
 	}
 
 	public ContaContabil getContaContabil() {
@@ -31,23 +32,14 @@ public class ContaContabilBean extends AbstractBean {
 	public void setContaContabil(ContaContabil contaContabil) {
 		this.contaContabil = contaContabil;
 	}
-
-	public List<ContaContabil> getListaContaContabil() {
-		return listaContaContabil;
-	}
-
-	public void setListaContaContabil(List<ContaContabil> listaContaContabil) {
-		this.listaContaContabil = listaContaContabil;
-	}
-
-	public List<PlanoDeContas> getListaPlanoDeContas() {
-		return listaPlanoDeContas;
-	}
-
-	public void setListaPlanoDeContas(List<PlanoDeContas> listaPlanoDeContas) {
-		this.listaPlanoDeContas = listaPlanoDeContas;
-	}
 	
-	
+	public List<PlanoDeContas> getListarPlanoDeContasPorEmpresa() {
+		return listarPlanoDeContasPorEmpresa;
+	}
+
+	public void setListarPlanoDeContasPorEmpresa(
+			List<PlanoDeContas> listarPlanoDeContasPorEmpresa) {
+		this.listarPlanoDeContasPorEmpresa = listarPlanoDeContasPorEmpresa;
+	}	
 	
 }

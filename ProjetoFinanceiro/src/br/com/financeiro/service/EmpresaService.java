@@ -53,4 +53,8 @@ public class EmpresaService implements Serializable {
 	public Empresa obterEmpresaPorId(Integer id) {
 		return empresaRepository.findBy(id);
 	}
+	
+	public Empresa obterEmpresaCompleta(int id) {
+		return empresaRepository.obterEmpresaCompleta(id);
+	}
 }

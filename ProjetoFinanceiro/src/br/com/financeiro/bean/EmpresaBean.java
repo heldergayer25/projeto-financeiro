@@ -46,6 +46,7 @@ public class EmpresaBean extends AbstractBean {
 	
 	@PostConstruct
 	public void init() {
+		empresaSelecionada = new Empresa();
 		empresa = new Empresa();
 		contato = new Contato();
 		endereco = new Endereco();
@@ -75,7 +76,20 @@ public class EmpresaBean extends AbstractBean {
 	}
 	
 	public void modalEditEmpresa() {
-		empresa = empresaService.obterEmpresaPorId(empresa.getId());
+		empresa = empresaService.obterEmpresaCompleta(empresaSelecionada.getId());
+		
+		for(Contato contatoEdit : empresa.getContatos()) {
+			if(contatoEdit.isPrincipal()) {
+				contato = contatoEdit;
+			}
+		}
+		
+		for(Endereco enderecoEdit : empresa.getEnderecos()) {
+			if(enderecoEdit.isPrincipal()) {
+				endereco = enderecoEdit;
+			}
+		}
+
 	}
 	
 	public void municipiosPorUf() {

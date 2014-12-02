@@ -62,7 +62,7 @@ public class PlanoDeContas implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "empresa_id")
 	public Empresa getEmpresa() {
 		return this.empresa;
@@ -72,7 +72,7 @@ public class PlanoDeContas implements java.io.Serializable {
 		this.empresa = empresa;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "plano_de_contas_id", nullable = false)
 	public PlanoDeContas getPlanoDeContas() {
 		return this.planoDeContas;
@@ -91,7 +91,7 @@ public class PlanoDeContas implements java.io.Serializable {
 		this.descricao = descricao;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "planoDeContas")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeContas")
 	public Set<PlanoDeContas> getPlanoDeContases() {
 		return this.planoDeContases;
 	}
@@ -100,13 +100,18 @@ public class PlanoDeContas implements java.io.Serializable {
 		this.planoDeContases = planoDeContases;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "planoDeContas")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoDeContas")
 	public Set<ContaContabil> getContaContabils() {
 		return this.contaContabils;
 	}
 
 	public void setContaContabils(Set<ContaContabil> contaContabils) {
 		this.contaContabils = contaContabils;
+	}
+	
+	@Override
+	public String toString() {
+		return getDescricao();
 	}
 
 }

@@ -60,7 +60,7 @@ public class Municipio implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "uf_id", nullable = false)
 	public Uf getUf() {
 		return this.uf;
@@ -88,7 +88,7 @@ public class Municipio implements java.io.Serializable {
 		this.ibge = ibge;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "municipio")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "municipio")
 	public Set<Endereco> getEnderecos() {
 		return this.enderecos;
 	}

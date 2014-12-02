@@ -22,8 +22,8 @@
 	                <p:outputLabel for="tipo" value="Tipo" />
 	                <p:inputSwitch id="tipo" value="#{contaContabilBean.contaContabil.tipo}" onLabel="Sintético" offLabel="Analítico" />
 	                <p:outputLabel for="planoDeContas" value="Plano de Contas" />	
-	                <p:selectOneMenu id="planoDeContas">
-	                	<f:selectItems />
+	                <p:selectOneMenu id="planoDeContas" value="#{contaContabilBean.contaContabil.planoDeContas}" converter="omnifaces.SelectItemsConverter" >
+	                	<f:selectItems value="#{contaContabilBean.listarPlanoDeContasPorEmpresa}" itemValue="#{_plano}" itemLabel="#{_plano.descricao}" var="_plano" />
 	                </p:selectOneMenu>			
       		      </h:panelGrid>          
             </p:panel>

@@ -115,7 +115,7 @@ public class Endereco implements java.io.Serializable {
 		this.clienteFornecedor = clienteFornecedor;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "municipio_id", nullable = false)
 	@NotNull
 	public Municipio getMunicipio() {
@@ -198,7 +198,7 @@ public class Endereco implements java.io.Serializable {
 	}
 
 	@Column(name = "principal")
-	public boolean getPrincipal() {
+	public boolean isPrincipal() {
 		return this.principal;
 	}
 
