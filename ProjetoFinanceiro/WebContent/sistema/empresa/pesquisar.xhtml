@@ -37,7 +37,7 @@
 	                        selectionMode="single"	                        
 	                        selection="#{empresaBean.empresaSelecionada}"
 	                        rowKey="#{_empresa.id}">                
-	                        <p:ajax event="rowSelect" listener="#{empresaBean.modalEditEmpresa()}" oncomplete="PF('modalEditEmpresa').show()" />        
+	                        <p:ajax event="rowSelect" listener="#{empresaBean.modalEditEmpresa()}" oncomplete="PF('modalEditEmpresa').show()" update=":#{p:component('modalEditEmpresaForm')}" />        
 			            	<p:column headerText="CPF/CNPJ">
 			            		<h:outputText value="#{_empresa.cpfCnpj}" />
 			            	</p:column>

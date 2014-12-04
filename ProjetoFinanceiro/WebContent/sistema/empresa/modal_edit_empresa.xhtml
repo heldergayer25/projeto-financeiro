@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-		<h:form>
+		<h:form id="modalEditEmpresaForm">
             <p:panel header="Dados">
 	            <h:panelGrid>
 	                <p:outputLabel for="razao" value="Razão Social" />
@@ -33,7 +33,7 @@
 	                <p:outputLabel for="outro" value="Outro" />
 	                <p:inputText id="outro" value="#{empresaBean.endereco.outro}" />
 	                <p:outputLabel for="uf" value="UF" />			                
-	                <p:selectOneMenu id="uf" converter="omnifaces.SelectItemsConverter" value="#{empresaBean.uf}">	                	
+	                <p:selectOneMenu id="uf" converter="omnifaces.SelectItemsConverter" value="#{empresaBean.endereco.municipio.uf}">	                	
 	                	<f:selectItems value="#{empresaBean.listaEstados}" var="_uf" itemLabel="#{_uf.sigla}" itemValue="#{_uf}" />
 	                	<p:ajax listener="#{empresaBean.municipiosPorUf()}" update="municipio" event="change" />	                		                			                	
 	                </p:selectOneMenu> 

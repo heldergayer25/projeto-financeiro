@@ -11,7 +11,8 @@ import br.com.financeiro.pojo.Empresa;
 @Repository
 public interface EmpresaRepository extends EntityRepository<Empresa, Serializable> {
 
-	Empresa findOptionalByCpfCnpj(String cpfCnpj);	
+	@Query("SELECT COUNT(e) FROM Empresa e WHERE e.cpfCnpj = ?1")
+	long countByCpfCnpj(String cpfCnpj);	
 	
 	@Query("SELECT e FROM Empresa e "
 			+ "LEFT JOIN FETCH e.contatos "

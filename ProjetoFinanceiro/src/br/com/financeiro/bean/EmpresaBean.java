@@ -58,17 +58,21 @@ public class EmpresaBean extends AbstractBean {
 	}
 	
 	public void salvar() throws Exception {
-		contato.setAtivo(true);
-		contato.setPrincipal(true);
-		contato.setEmpresa(empresa);
-		endereco.setAtivo(true);
-		endereco.setPais("BR");
-		endereco.setPrincipal(true);
-		endereco.setMunicipio(municipioSelecionado);
-		endereco.setEmpresa(empresa);
-		empresa.setAtivo(true);		
-		empresa.getContatos().add(contato);
-		empresa.getEnderecos().add(endereco);	
+		
+		if(empresa.getId() == 0) {
+			contato.setAtivo(true);
+			contato.setPrincipal(true);
+			contato.setEmpresa(empresa);
+			endereco.setAtivo(true);
+			endereco.setPais("BR");
+			endereco.setPrincipal(true);
+			endereco.setMunicipio(municipioSelecionado);
+			endereco.setEmpresa(empresa);
+			empresa.setAtivo(true);		
+			empresa.getContatos().add(contato);
+			empresa.getEnderecos().add(endereco);
+		}
+			
 		
 		empresaService.salvar(empresa);
 		
@@ -89,7 +93,7 @@ public class EmpresaBean extends AbstractBean {
 				endereco = enderecoEdit;
 			}
 		}
-
+		
 	}
 	
 	public void municipiosPorUf() {

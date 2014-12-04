@@ -14,7 +14,7 @@ import br.com.financeiro.pojo.Endereco;
 import br.com.financeiro.repository.ContatoRepository;
 import br.com.financeiro.repository.EmpresaRepository;
 import br.com.financeiro.repository.EnderecoRepository;
-import br.com.financeiro.util.Mensagens;
+import br.com.financeiro.util.FinanceiroException;
 
 @Stateless
 public class EmpresaService implements Serializable {
@@ -26,10 +26,10 @@ public class EmpresaService implements Serializable {
 	@Inject EnderecoRepository enderecoRepository;
 	
 	@Transactional
-	public void salvar(Empresa empresa) throws Exception {
+	public void salvar(Empresa empresa) throws FinanceiroException {
 		if(empresa != null) {
-			if((empresaRepository.findOptionalByCpfCnpj(empresa.getCpfCnpj()) != null) && empresa.getId() == null) {
-				Mensagens.error("CPF/CNPJ já cadastrado!");
+			if((empresaRepository.countByCpfCnpj(empresa.getCpfCnpj()) > 0) && empresa.getId() == null) {
+				throw new FinanceiroException("CPF/CNPJ já cadastrado!");				
 			} else {
 				
 				empresaRepository.save(empresa);

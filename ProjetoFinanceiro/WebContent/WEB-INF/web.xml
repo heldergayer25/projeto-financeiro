@@ -5,7 +5,7 @@
  <display-name>ProjetoFinanceiro</display-name>
  <context-param>
   <param-name>primefaces.THEME</param-name>
-  <param-value>theme-two</param-value>
+  <param-value>financeiro-theme</param-value>
  </context-param>
  <!-- Login filter -->
  <filter>

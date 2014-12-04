@@ -19,6 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 
 /**
@@ -81,6 +84,8 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	@Column(name = "nome", nullable = false, length = 100)
+	@NotNull
+	@Length(max = 100, message = "O Nome deve ter no máximo 100 caractéries!")
 	public String getNome() {
 		return this.nome;
 	}
@@ -89,7 +94,9 @@ public class Usuario implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Column(name = "cpf", nullable = false, length = 11)
+	@Column(name = "cpf", nullable = false, length = 11)	
+	@NotNull
+	@Length(max = 11, min = 11, message = "CPF deve ter 11 números!")
 	public String getCpf() {
 		return this.cpf;
 	}
@@ -108,7 +115,7 @@ public class Usuario implements java.io.Serializable {
 		this.modulos = modulos;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	public Set<Contato> getContatos() {
 		return this.contatos;
 	}
@@ -127,7 +134,7 @@ public class Usuario implements java.io.Serializable {
 		this.empresas = empresas;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	public Set<Endereco> getEnderecos() {
 		return this.enderecos;
 	}
