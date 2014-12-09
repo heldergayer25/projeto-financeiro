@@ -46,8 +46,20 @@ public class EmpresaService implements Serializable {
 		}
 	}
 
-	public List<Empresa> listarEmpresas() {
-		return empresaRepository.findAll();
+	@Transactional
+	public void excluir(List<Empresa> empresas) {
+		
+		for(Empresa empresa : empresas) {
+			if(empresa.isSelecionado()) {
+				empresa.setAtivo(false);
+				empresaRepository.save(empresa);
+			}
+		}
+		
+	}
+	
+	public List<Empresa> listarEmpresasAtivas() {
+		return empresaRepository.listarEmpresasAtivas();
 	}
 
 	public Empresa obterEmpresaPorId(Integer id) {

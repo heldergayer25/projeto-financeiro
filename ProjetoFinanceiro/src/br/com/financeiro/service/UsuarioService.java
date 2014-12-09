@@ -1,6 +1,7 @@
 package br.com.financeiro.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -33,7 +34,6 @@ public class UsuarioService implements Serializable {
 	@Transactional
 	public void salvar(Usuario usuario) throws FinanceiroException {
 		
-		
 		acessoRepository.save(usuario.getAcesso());
 		usuarioRepository.save(usuario);
 		
@@ -53,7 +53,14 @@ public class UsuarioService implements Serializable {
 	}
 	
 	@Transactional
-	public void excluir(Usuario usuario) {
+	public void excluir(List<Usuario> usuarios) {
+		
+		for(Usuario usuario : usuarios) {
+			if(usuario.isSelecionado()) {
+				usuario.setAtivo(false);
+				usuarioRepository.save(usuario);
+			}
+		}
 		
 	}	
 	
@@ -65,4 +72,8 @@ public class UsuarioService implements Serializable {
 		return usuarioRepository.findByAcesso(acesso);
 	}
 
+	public List<Usuario> listarUsuariosAtivos() {
+		return usuarioRepository.listarUsuariosAtivos();
+	}
+	
 }

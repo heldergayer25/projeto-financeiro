@@ -52,6 +52,8 @@ public class UsuarioBean extends AbstractBean {
 	private Contato contato;
 	private Endereco endereco;
 	private Acesso acesso;
+	private List<Usuario> usuarios;
+	private Usuario usuarioSelecionado;
 	
 	@PostConstruct
 	public void init() {
@@ -61,9 +63,11 @@ public class UsuarioBean extends AbstractBean {
 		endereco = new Endereco();
 		contato = new Contato();
 		acesso = new Acesso();
+		usuarioSelecionado = new Usuario();
 		
 		uf = new Uf();
 		uf = ufService.obterUfPorId("AC");
+		usuarios = new ArrayList<Usuario>(usuarioService.listarUsuariosAtivos());
 		municipiosPorUf();
 		carregarPickListModulos();
 	}
@@ -85,6 +89,12 @@ public class UsuarioBean extends AbstractBean {
 		Mensagens.info("Usuário salvo com sucesso!");
 	}
 
+	public void excluir() {
+		usuarioService.excluir(usuarios);
+		Mensagens.info("Usuário exluído com sucesso!");
+		usuarios = new ArrayList<Usuario>(usuarioService.listarUsuariosAtivos());
+	}
+	
 	public void municipiosPorUf() {
 		municipios = new ArrayList<Municipio>(municipioService.listaMunicipiosPorUf(uf));
 	}	
@@ -95,6 +105,38 @@ public class UsuarioBean extends AbstractBean {
 		
 		modulosPickList = new DualListModel<Modulo>(modulosSource, modulosTarget);
 	}
+	
+	public void modalEditUsuario() {
+		usuario = usuarioService.obterUsuarioPorId(usuarioSelecionado.getId());
+		
+		for(Contato contatoEdit : usuario.getContatos()) {
+			if(contatoEdit.isPrincipal()) {
+				contato = contatoEdit;
+			}
+		}
+		
+		for(Endereco enderecoEdit : usuario.getEnderecos()) {
+			if(enderecoEdit.isPrincipal()) {
+				endereco = enderecoEdit;
+			}
+		}
+		
+	}
+	
+	public int renderedBotaoExcluir() {
+		int contador = 0;
+		for(Usuario usuario : usuarios) {
+			if(usuario.isSelecionado()) {
+				contador++;
+			}
+		}
+		
+		return contador;
+	}
+	
+	/*
+	 * Getters and Setters
+	 */
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -198,6 +240,22 @@ public class UsuarioBean extends AbstractBean {
 
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario getUsuarioSelecionado() {
+		return usuarioSelecionado;
+	}
+
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+		this.usuarioSelecionado = usuarioSelecionado;
 	}
 
 }

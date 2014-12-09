@@ -1,6 +1,7 @@
 package br.com.financeiro.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
@@ -19,5 +20,8 @@ public interface EmpresaRepository extends EntityRepository<Empresa, Serializabl
 			+ "LEFT JOIN FETCH e.enderecos "			
          + "WHERE e.id = ?1")
 	Empresa obterEmpresaCompleta(int id);
+
+	@Query("SELECT e FROM Empresa e WHERE e.ativo = true ORDER BY e.razao ASC")
+	List<Empresa> listarEmpresasAtivas();
 	
 }

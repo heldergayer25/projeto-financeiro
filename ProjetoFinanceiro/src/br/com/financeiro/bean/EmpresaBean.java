@@ -53,7 +53,7 @@ public class EmpresaBean extends AbstractBean {
 		uf = new Uf();
 		uf = ufService.obterUfPorId("AC");
 		municipiosPorUf();
-		empresas = new ArrayList<Empresa>(empresaService.listarEmpresas());
+		empresas = new ArrayList<Empresa>(empresaService.listarEmpresasAtivas());
 		filtroEmpresas = new ArrayList<Empresa>();
 	}
 	
@@ -79,6 +79,12 @@ public class EmpresaBean extends AbstractBean {
 		Mensagens.info("Empresa salva com sucesso!");
 	}
 	
+	public void excluir() {
+		empresaService.excluir(empresas);
+		Mensagens.info("Empresa exluída com sucesso!");
+		empresas = new ArrayList<Empresa>(empresaService.listarEmpresasAtivas());
+	}
+	
 	public void modalEditEmpresa() {
 		empresa = empresaService.obterEmpresaCompleta(empresaSelecionada.getId());
 		
@@ -95,6 +101,22 @@ public class EmpresaBean extends AbstractBean {
 		}
 		
 	}
+	
+	public int renderedBotaoExcluir() {
+		int contador = 0;
+		for(Empresa empresa : empresas) {
+			if(empresa.isSelecionado()) {
+				contador++;
+			}
+		}
+		
+		return contador;
+	}
+	
+	
+	/*
+	 * Getters and Setters
+	 */
 	
 	public void municipiosPorUf() {
 		municipios = new ArrayList<Municipio>(municipioService.listaMunicipiosPorUf(uf));

@@ -43,10 +43,16 @@
 			            	</p:column>
 			            	<p:column headerText="Razâo Social">
 			            		<h:outputText value="#{_empresa.razao}" />
-			            	</p:column>		            	
+			            	</p:column>
+			            	<p:column headerText="Excluir">
+			            		<p:selectBooleanCheckbox value="#{_empresa.selecionado}">
+			            			<p:ajax update="@form" event="change" />
+			            		</p:selectBooleanCheckbox>
+			            	</p:column>
 			            </p:dataTable>
 			        </p:tab>
 			    </p:tabView>
+			    <p:commandButton value="Excluir" rendered="#{empresaBean.renderedBotaoExcluir() > 0}" action="#{empresaBean.excluir()}" update="@form" />
 		    </h:form>
 		</ui:define>
 	</ui:composition>      

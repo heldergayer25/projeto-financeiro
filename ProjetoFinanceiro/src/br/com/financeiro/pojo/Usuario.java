@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -37,10 +38,13 @@ public class Usuario implements java.io.Serializable {
 	private Acesso acesso;
 	private String nome;
 	private String cpf;
+	private boolean ativo;
 	private Set<Modulo> modulos = new HashSet<>(0);
 	private Set<Contato> contatos = new HashSet<>(0);
 	private Set<Empresa> empresas = new HashSet<>(0);
 	private Set<Endereco> enderecos = new HashSet<>(0);
+	
+	private boolean selecionado;
 
 	public Usuario() {
 	}
@@ -141,6 +145,25 @@ public class Usuario implements java.io.Serializable {
 
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	@Transient
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(boolean selecionado) {
+		this.selecionado = selecionado;
+	}
+
+	@Column(name = "ativo", nullable = false)
+	@NotNull
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

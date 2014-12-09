@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -43,6 +44,8 @@ public class Empresa implements java.io.Serializable {
 	private Set<Contato> contatos = new HashSet<>(0);
 	private Set<PlanoDeContas> planoDeContases = new HashSet<>(0);
 	private Set<Endereco> enderecos = new HashSet<>(0);
+	
+	private boolean selecionado;
 
 	public Empresa() {
 	}
@@ -186,6 +189,15 @@ public class Empresa implements java.io.Serializable {
 
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	@Transient
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(boolean selecionado) {
+		this.selecionado = selecionado;
 	}
 
 }
