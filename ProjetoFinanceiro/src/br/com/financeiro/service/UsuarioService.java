@@ -64,6 +64,10 @@ public class UsuarioService implements Serializable {
 		
 	}	
 	
+	public Usuario obterUsuarioCompleto(int id) {
+		return usuarioRepository.obterUsuarioCompleto(id);
+	}
+	
 	public Usuario obterUsuarioPorId(int id) {
 		return usuarioRepository.findOptionalBy(id);
 	}

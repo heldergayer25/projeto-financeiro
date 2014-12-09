@@ -44,7 +44,7 @@
 			            	<p:column headerText="Nome">
 			            		<h:outputText value="#{_usuario.nome}" />
 			            	</p:column>
-			            	<p:column headerText="Excluir">
+			            	<p:column headerText="Excluir" style="text-align: center;">
 			            		<p:selectBooleanCheckbox value="#{_usuario.selecionado}">
 			            			<p:ajax update="@form" event="change" />
 			            		</p:selectBooleanCheckbox>

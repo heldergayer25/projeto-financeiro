@@ -44,7 +44,7 @@
 			            	<p:column headerText="Razâo Social">
 			            		<h:outputText value="#{_empresa.razao}" />
 			            	</p:column>
-			            	<p:column headerText="Excluir">
+			            	<p:column headerText="Excluir" style="text-align: center;">
 			            		<p:selectBooleanCheckbox value="#{_empresa.selecionado}">
 			            			<p:ajax update="@form" event="change" />
 			            		</p:selectBooleanCheckbox>

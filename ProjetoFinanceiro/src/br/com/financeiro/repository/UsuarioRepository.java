@@ -17,6 +17,12 @@ public interface UsuarioRepository extends EntityRepository<Usuario, Serializabl
 
 	Usuario findByAcesso(Acesso acesso);	
 	
+	@Query("SELECT u FROM Usuario u "
+			+ "LEFT JOIN FETCH u.contatos "
+			+ "LEFT JOIN FETCH u.enderecos "			
+         + "WHERE u.id = ?1")
+	Usuario obterUsuarioCompleto(int id);
+	
 	@Query("SELECT u FROM Usuario u WHERE u.ativo = true ORDER BY u.nome ASC")
 	List<Usuario> listarUsuariosAtivos();
 	

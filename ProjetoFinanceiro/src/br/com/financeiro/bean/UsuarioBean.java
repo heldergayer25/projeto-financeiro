@@ -82,11 +82,13 @@ public class UsuarioBean extends AbstractBean {
 		usuario.getEnderecos().add(endereco);
 		acesso.getUsuarios().add(usuario);
 		usuario.setAcesso(acesso);
+		usuario.setAtivo(true);
 		usuario.setModulos(new HashSet<Modulo>(modulosPickList.getTarget()));
 		
 		usuarioService.salvar(usuario);
 		
 		Mensagens.info("Usuário salvo com sucesso!");
+		usuarios = new ArrayList<Usuario>(usuarioService.listarUsuariosAtivos());
 	}
 
 	public void excluir() {
@@ -107,7 +109,7 @@ public class UsuarioBean extends AbstractBean {
 	}
 	
 	public void modalEditUsuario() {
-		usuario = usuarioService.obterUsuarioPorId(usuarioSelecionado.getId());
+		usuario = usuarioService.obterUsuarioCompleto(usuarioSelecionado.getId());
 		
 		for(Contato contatoEdit : usuario.getContatos()) {
 			if(contatoEdit.isPrincipal()) {
